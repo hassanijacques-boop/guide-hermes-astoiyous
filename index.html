@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide — Créer ton propre agent IA (Hermes) · Astoïyous</title>
+<style>
+  :root{--bg:#0b1120;--card:#131c2f;--line:#233149;--txt:#e6ecf8;--muted:#93a4c0;
+        --cyan:#22d3ee;--green:#4ade80;--gold:#fbbf24;--red:#f87171}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.7}
+  .wrap{max-width:820px;margin:0 auto;padding:30px 20px 70px}
+  header{text-align:center;padding:34px 0 26px;border-bottom:1px solid var(--line);margin-bottom:32px}
+  h1{font-size:clamp(1.5rem,5vw,2.1rem);font-weight:800;letter-spacing:-.5px;margin-bottom:9px}
+  h1 span{color:var(--cyan)}
+  .sub{color:var(--muted);font-size:.97rem}
+  h2{font-size:1.22rem;font-weight:800;color:var(--cyan);margin:34px 0 13px;display:flex;align-items:center;gap:11px}
+  .num{background:linear-gradient(135deg,var(--cyan),#3b82f6);color:#04121f;width:30px;height:30px;
+       border-radius:9px;display:grid;place-items:center;font-size:.92rem;flex-shrink:0}
+  p{color:var(--muted);margin-bottom:13px}
+  p strong,li strong{color:var(--txt)}
+  code{background:#1c2740;border:1px solid var(--line);padding:2px 7px;border-radius:5px;
+       font-family:ui-monospace,Consolas,monospace;font-size:.87rem;color:var(--cyan)}
+  pre{background:#0d1526;border:1px solid var(--line);border-left:3px solid var(--cyan);
+      border-radius:9px;padding:15px 17px;overflow-x:auto;margin:12px 0 16px}
+  pre code{background:none;border:none;padding:0;color:#a5f3fc;font-size:.85rem;line-height:1.65}
+  .box{border-radius:12px;padding:16px 18px;margin:16px 0;border:1px solid}
+  .info{background:rgba(34,211,238,.07);border-color:rgba(34,211,238,.3)}
+  .ok{background:rgba(74,222,128,.07);border-color:rgba(74,222,128,.3)}
+  .warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.32)}
+  .box .t{font-weight:800;margin-bottom:7px;font-size:.94rem}
+  .info .t{color:var(--cyan)} .ok .t{color:var(--green)} .warn .t{color:var(--gold)}
+  .box p:last-child{margin-bottom:0}
+  ul,ol{margin:11px 0 15px 22px;color:var(--muted)}
+  li{margin-bottom:7px}
+  table{width:100%;border-collapse:collapse;margin:15px 0;font-size:.9rem}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left}
+  th{background:#182339;color:var(--cyan);font-weight:700}
+  td{color:var(--muted)}
+  .chk{list-style:none;margin-left:0}
+  .chk li{display:flex;gap:11px;align-items:flex-start;background:var(--card);border:1px solid var(--line);
+          border-radius:9px;padding:11px 14px;margin-bottom:8px}
+  .chk li::before{content:'☐';color:var(--cyan);font-size:1.15rem;line-height:1.2}
+  .final{background:linear-gradient(135deg,rgba(34,211,238,.11),rgba(59,130,246,.06));
+         border:1px solid rgba(34,211,238,.32);border-radius:14px;padding:24px;margin-top:34px;text-align:center}
+  .final h2{justify-content:center;margin-top:0}
+  footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:44px;padding-top:22px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🤖 Créer <span>TON</span> propre agent IA</h1>
+  <p class="sub">Guide pas à pas — Astoïyous Hassani Moustoifa<br>Durée totale : environ <strong>45 minutes</strong> · Coût : environ <strong>5 €/mois</strong></p>
+</header>
+
+<div class="box info">
+  <div class="t">🎯 Ce que tu vas obtenir</div>
+  <p>Un assistant IA <strong>à toi</strong>, qui tourne <strong>24h/24</strong> sur ton serveur, que tu pilotes
+     depuis <strong>Telegram</strong> (comme sur ton téléphone). Il saura créer des sites, écrire des documents,
+     coder, faire des recherches…</p>
+</div>
+
+<div class="box warn">
+  <div class="t">⚠️ Avant de commencer — 2 choses à préparer</div>
+  <p><strong>1.</strong> Une carte bancaire (pour payer le serveur ~5 €/mois)<br>
+     <strong>2.</strong> Un ordinateur pour faire l'installation (après, tu utiliseras ton téléphone)</p>
+</div>
+
+<h2><span class="num">1</span> Louer ton serveur</h2>
+<p>Un <strong>serveur</strong> (ou « VPS ») est un ordinateur allumé en permanence, quelque part dans le monde.
+C'est là que ton agent IA habitera.</p>
+<table>
+  <tr><th>Fournisseur</th><th>Prix indicatif</th><th>Pour qui ?</th></tr>
+  <tr><td><strong>Hetzner</strong> (hetzner.com)</td><td>~4 €/mois</td><td>⭐ Le meilleur rapport qualité/prix</td></tr>
+  <tr><td><strong>OVH</strong> (ovhcloud.com)</td><td>~5 €/mois</td><td>Français, interface simple</td></tr>
+  <tr><td><strong>Hostinger</strong> (hostinger.fr)</td><td>~4 €/mois</td><td>Interface très simple pour débuter</td></tr>
+</table>
+<p><strong>Configuration à choisir :</strong></p>
+<ul>
+  <li>Type : le plus petit (2 processeurs / <strong>4 Go de RAM</strong> / 40 Go de disque)</li>
+  <li>Système : <strong>Ubuntu 24.04</strong> (prends bien cette version)</li>
+  <li>Nom : <code>hermes-astoiyous</code></li>
+</ul>
+<div class="box ok">
+  <div class="t">✅ À la fin de cette étape</div>
+  <p>Tu reçois un email avec <strong>l'adresse IP</strong> de ton serveur (ex. <code>123.45.67.89</code>) et
+     un <strong>mot de passe</strong>. <strong>Garde-les précieusement.</strong></p>
+</div>
+
+<h2><span class="num">2</span> Te connecter à ton serveur</h2>
+<p>Sur ton ordinateur Windows : ouvre <strong>PowerShell</strong> (menu Démarrer → tape « PowerShell »).</p>
+<p>Tape cette commande (remplace <code>TON_IP</code> par ton adresse IP) :</p>
+<pre><code>ssh root@TON_IP</code></pre>
+<p>Elle répond <code>Are you sure you want to continue connecting?</code> → tape <code>yes</code> puis Entrée.<br>
+Ensuite, tape le <strong>mot de passe</strong> reçu par email (⚠️ il ne s'affiche pas quand tu tapes, c'est normal — tape-le et appuie sur Entrée).</p>
+<div class="box ok">
+  <div class="t">✅ Tu es connecté</div>
+  <p>Le texte de la console a changé (quelque chose comme <code>root@hermes-astoiyous:~#</code>).
+     <strong>Tout ce qui suit se tape ici.</strong></p>
+</div>
+
+<h2><span class="num">3</span> Installer Hermes</h2>
+<p>Copie cette ligne, colle-la dans la console et appuie sur Entrée :</p>
+<pre><code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code></pre>
+<p>L'installation prend <strong>2 à 5 minutes</strong>. Laisse-la travailler.</p>
+<p>Ensuite, lance l'assistant de configuration :</p>
+<pre><code>hermes setup</code></pre>
+
+<h2><span class="num">4</span> Choisir ton modèle IA</h2>
+<p>Ton agent a besoin d'un « cerveau » : un modèle d'IA. Tu dois t'inscrire chez un fournisseur et récupérer une <strong>clé API</strong>
+(une longue suite de lettres et de chiffres).</p>
+<table>
+  <tr><th>Fournisseur</th><th>Prix</th><th>Remarque</th></tr>
+  <tr><td><strong>DeepSeek</strong> (platform.deepseek.com)</td><td>Très économique</td><td>⭐ Recommandé pour commencer — quelques euros suffisent pour des mois</td></tr>
+  <tr><td><strong>OpenRouter</strong> (openrouter.ai)</td><td>Gratuit possible</td><td>Certains modèles sont gratuits</td></tr>
+</table>
+<p>Puis dans la console :</p>
+<pre><code>hermes model</code></pre>
+<p>Choisis ton fournisseur, colle ta clé API. Fais ensuite un test :</p>
+<pre><code>hermes chat -q "Bonjour, présente-toi en 2 phrases"</code></pre>
+<div class="box ok">
+  <div class="t">🎉 Si l'IA te répond…</div>
+  <p>Ton agent fonctionne ! Il te reste juste à le connecter à Telegram pour l'utiliser depuis ton téléphone.</p>
+</div>
+
+<h2><span class="num">5</span> Connecter Telegram (pour l'utiliser sur ton téléphone)</h2>
+<ol>
+  <li>Dans Telegram, cherche <strong>@BotFather</strong> (le compte officiel avec le logo bleu ✔️)</li>
+  <li>Envoie-lui : <code>/newbot</code></li>
+  <li>Il demande un <strong>nom</strong> (ex. « Mon Agent IA ») puis un <strong>identifiant</strong> finissant par <code>bot</code> (ex. <code>astoiyous_bot</code>)</li>
+  <li>Il te donne un <strong>jeton</strong> (token) — une longue suite de caractères. <strong>Copie-le.</strong></li>
+</ol>
+<p>Dans la console :</p>
+<pre><code>hermes gateway setup</code></pre>
+<p>Choisis <strong>Telegram</strong>, colle le jeton. Puis démarre le service :</p>
+<pre><code>hermes gateway install
+hermes gateway start</code></pre>
+<div class="box ok">
+  <div class="t">✅ TEST FINAL</div>
+  <p>Ouvre Telegram, cherche <strong>ton bot</strong>, envoie-lui « Bonjour ».
+     S'il répond → <strong>c'est gagné, tu as ton propre agent IA !</strong> 🚀</p>
+</div>
+
+<h2><span class="num">6</span> Créer ton premier site avec ton agent</h2>
+<p>Maintenant, la partie qui va te servir pour ton BTS et ta carrière. Dans Telegram, demande à ton agent :</p>
+<pre><code>Crée-moi un site web simple pour présenter mes compétences
+en réseaux et sécurité. Je m'appelle Astoïyous, je prépare
+un BTS TSRS à Mayotte. Il doit être moderne et adapté au
+téléphone. Puis explique-moi comment le mettre en ligne.</code></pre>
+<p>Ton agent va : créer le site, te demander de valider, puis te guider pour le publier gratuitement (GitHub Pages).</p>
+<div class="box info">
+  <div class="t">💡 Le secret pour bien piloter l'IA</div>
+  <p>Plus ta demande est <strong>précise</strong>, meilleur est le résultat. Dis toujours :
+     <strong>quoi</strong> (le type de site), <strong>pour qui</strong> (recruteurs, camarades…),
+     <strong>le style</strong> (moderne, sobre, coloré…), et <strong>ce que tu veux y trouver</strong>.</p>
+</div>
+
+<h2><span class="num">7</span> Les commandes à connaître</h2>
+<table>
+  <tr><th>Commande</th><th>Ce qu'elle fait</th></tr>
+  <tr><td><code>hermes</code></td><td>Discuter avec l'agent dans la console</td></tr>
+  <tr><td><code>hermes chat -q "ta question"</code></td><td>Poser une question rapide</td></tr>
+  <tr><td><code>hermes gateway status</code></td><td>Vérifier que Telegram fonctionne</td></tr>
+  <tr><td><code>hermes doctor</code></td><td>Vérifier que tout va bien</td></tr>
+  <tr><td><code>hermes update</code></td><td>Mettre à jour</td></tr>
+  <tr><td><code>/new</code> (dans Telegram)</td><td>Démarrer une nouvelle conversation</td></tr>
+</table>
+
+<div class="final">
+  <h2>📋 TA CHECKLIST</h2>
+  <ul class="chk" style="text-align:left;margin-top:16px">
+    <li>J'ai loué mon serveur (Ubuntu 24.04)</li>
+    <li>Je me suis connecté en SSH</li>
+    <li>J'ai installé Hermes</li>
+    <li>J'ai choisi mon modèle et collé ma clé API</li>
+    <li>J'ai testé : l'IA m'a répondu</li>
+    <li>J'ai créé mon bot Telegram et connecté le gateway</li>
+    <li>J'ai envoyé « Bonjour » à mon bot et il a répondu</li>
+    <li>J'ai créé mon premier site avec mon agent 🎉</li>
+  </ul>
+</div>
+
+<div class="box warn" style="margin-top:30px">
+  <div class="t">🔒 Sécurité — 3 règles simples</div>
+  <p><strong>1.</strong> Ne partage <strong>jamais</strong> ta clé API ni le jeton de ton bot.<br>
+     <strong>2.</strong> N'utilise pas le mot de passe « root » donné par l'hébergeur : change-le.<br>
+     <strong>3.</strong> Fais une sauvegarde de ton dossier <code>/root/.hermes</code> de temps en temps.</p>
+</div>
+
+<footer>
+  Guide créé pour Astoïyous Hassani Moustoifa · BTS TSRS · Mayotte<br>
+  <em>« L'IA ne remplace pas le technicien : elle lui donne des superpouvoirs. »</em>
+</footer>
+
+</div>
+</body>
+</html>
